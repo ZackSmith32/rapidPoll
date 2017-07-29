@@ -12,20 +12,19 @@ const client = Rapid.createClient
 //   })
 
 client
-	.channel('questions')
+	.channel('qPing')
 	.subscribe()
-/*
-$('#inputQuestion').keyup(e => {
-	if (e.which === 13) {
-		client
-			.channel('questions')
-			.publish({
-				question: $('#inputQuestion').val()
-			})
-		$('#inputQuestion').val('')
-	}
+
+const doc = 
+	client
+		.collection('questions')
+		.newDocument()
+
+doc.mutate( {
+	id: doc.id,
+	question: "",
+	answerList: []
 })
-*/
 
 var answerList = []
 
@@ -40,13 +39,21 @@ $('#answerOptions').on( {keyup: e => {
 
 $('button').on( { click: e => {
 	console.log("button")
+	console.log("doc id = " + doc.id)
 	console.log( answerList)
+	
+	doc.mutate( {
+		id: doc.id,
+		questionText: $('#inputQuestion').val(),
+		answerList: answerList
+	})
+	
 	client
-		.channel('questions')
+		.channel('qPing')
 		.publish({
-			question: $('#inputQuestion').val(),
-			answerList: answerList
+			questionID : doc.id
 		})
+
 	console.log("button")
 	$('#inputQuestion').val('')
 	$('#answer').val('')

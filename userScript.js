@@ -2,38 +2,44 @@ const client = Rapid.createClient
 	('NDA1OWE0MWo1b3AzYjJ0LnJhcGlkLmlv')
 const un = 'zack'
 
-/*
-client
-  .collection('messages2')
-  .subscribe((messages, changes) => {
-	console.log(messages)
-	console.log(changes)
-	changes.added.forEach(message => {
-	  $('#chatbox').append($('<div>').text(message.body.text))
-	})
-  })
-*/
+console.log("userScript")
+
 
 client
-	.channel('questions')
+	.channel('qPing')
 	.subscribe( 
-		question => {
-			$('#questiondiv').text(question.question)
-			console.log(question.answerList)
-			console.log(question.id)
+		(qID) => {
+			// $('#questiondiv').text(question.question)
+			// question.answerList.foreach( (val, i, a) => {
+			// 	$('#`answerBox').
+			// })
+
+			console.log(qID.questionID)
+
+			question = 
+				client
+					.collection("questions")
+					.filer({ 'id' : qID.questionID })
+					.subscribe( q => {
+						console.log(q.questionText)
+					})
+
 		}
 	)
-
+/*
 $('#input').keyup(e => {
 	if (e.which === 13) {
-		client
+	var doc= client
 			.collection('messages2')
-			.newDocument()
-			.mutate({ text: $('#input').val(),
+			.newDocument() ;
+doc.id
+	doc		.mutate({ id: doc.id,
+		text: $('#input').val(),
 				name: un})
 		$('#input').val('')
 	}
 })
+*/
 
 var testUserData = {
 	questionID : 42,
@@ -50,5 +56,4 @@ $('#response').on( {'click' : e => {
 			answers : testUserData.answers,
 			username : testUserData.username
 		})
-	
-})
+}})
