@@ -20,15 +20,9 @@ client
 		question => {
 			$('#questiondiv').text(question.question)
 			console.log(question.answerList)
+			console.log(question.id)
 		}
 	)
-
-client
-	.channel('answers')
-	.subscribe( answers => {
-		console.log(answers)
-		$('#questiondiv').text(answers.answers)
-	})
 
 $('#input').keyup(e => {
 	if (e.which === 13) {
@@ -41,4 +35,20 @@ $('#input').keyup(e => {
 	}
 })
 
+var testUserData = {
+	questionID : 42,
+	answers : ['me', 'myself', 'and I'],
+	username : 'zsmith'
+}
 
+// every time a response is clicked                
+$('#response').on( {'click' : e => {
+	client
+		.collection('results')
+		.mutate( {
+			questionID : testUserData.questionID,
+			answers : testUserData.answers,
+			username : testUserData.username
+		})
+	
+})
