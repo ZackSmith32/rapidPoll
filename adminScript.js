@@ -1,4 +1,5 @@
-const client = rapid.createClient('cmVhNi5yYXBpZC5pbw==')
+const client = Rapid.createClient
+	('NDA1OWE0MWo1b3AzYjJ0LnJhcGlkLmlv')
 
 // client
 // 	.collection('messages2')
@@ -26,21 +27,28 @@ $('#inputQuestion').keyup(e => {
 })
 */
 
+var answerList = []
+
 $('#answerOptions').on( {keyup: e => {
-	console.log("registering")
 	if (e.which === 13) {
-		console.log('submit answer')
-		$('#answerOptions').append($('<input id="answer2" placeholder="Type answer option..." />'))
+		// console.log("this" + $('#answerOptions > input:last').val())
+		answerList.push($('#answerOptions > input:last').val())
+		$('#answerOptions').append(
+			$('<input id="answer" placeholder="Type answer option..." />'))
 	}
 }})
 
-$('button').click( e => {
+$('button').on( { click: e => {
+	console.log("button")
+	console.log( answerList)
 	client
 		.channel('questions')
 		.publish({
 			question: $('#inputQuestion').val(),
-			answers: $('#answerOptions')
+			answerList: answerList
 		})
+	console.log("button")
 	$('#inputQuestion').val('')
-})
+	$('#answer').val('')
+}})
 

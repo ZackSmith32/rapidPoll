@@ -1,4 +1,5 @@
-const client = rapid.createClient('cmVhNi5yYXBpZC5pbw==')
+const client = Rapid.createClient
+	('NDA1OWE0MWo1b3AzYjJ0LnJhcGlkLmlv')
 const un = 'zack'
 
 /*
@@ -18,9 +19,7 @@ client
 	.subscribe( 
 		question => {
 			$('#questiondiv').text(question.question)
-		},
-		answers => {
-			$('')
+			console.log(question.answerList)
 		}
 	)
 
