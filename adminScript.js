@@ -24,20 +24,7 @@ $('#answerOptions').on( {keyup: e => {
 	}
 }})
 
-// $('button').on( { click: e => {
-// 	console.log("button")
-// 	console.log( answerList)
-// 	client
-// 		.channel('questions')
-// 		.publish({
-// 			question: $('#inputQuestion').val(),
-// 			answerList: answerList
-// 		})
-// 	console.log("button")
-// 	$('#inputQuestion').val('')
-// 	$('#answer').val('')
-// 	window.location.href = "chart.html";
-// }})
+
 $('button').on( { click: e => {
 	console.log("button")
 	console.log("doc <i></i>d = " + doc.id)
