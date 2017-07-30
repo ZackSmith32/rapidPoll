@@ -1,31 +1,17 @@
 const client = Rapid.createClient
 	('NDA1OWE0MWo1b3AzYjJ0LnJhcGlkLmlv')
 
-// client
-// 	.collection('messages2')
-// 	.subscribe((messages, changes) => {
-// 		console.log(messages)
-// 		console.log(changes)
-// 		changes.added.forEach(message => {
-// 		$('#chatbox').append($('<div>').text(message.body.text))
-// 	})
-//   })
-
 client
-	.channel('questions')
+	.channel('qPing')
 	.subscribe()
-/*
-$('#inputQuestion').keyup(e => {
-	if (e.which === 13) {
-		client
-			.channel('questions')
-			.publish({
-				question: $('#inputQuestion').val()
-			})
-		$('#inputQuestion').val('')
-	}
-})
-*/
+
+// questionList = client.collection("questions")
+
+const doc = 
+	client
+		.collection('questions')
+		.newDocument()
+
 
 var answerList = []
 
@@ -52,6 +38,29 @@ $('#answerOptions').on( {keyup: e => {
 // 	$('#answer').val('')
 // 	window.location.href = "chart.html";
 // }})
+$('button').on( { click: e => {
+	console.log("button")
+	console.log("doc <i></i>d = " + doc.id)
+	console.log("question text = " + $('#inputQuestion').val())
+	console.log( answerList)
+	
+	doc.mutate( {
+		id: doc.id,
+		questionText: $('#inputQuestion').val(),
+		answerList: answerList
+	})
+	
+	client
+		.channel('qPing')
+		.publish({
+			questionID : doc.id
+		})
+
+	console.log("button")
+	// $('#inputQuestion').val('')
+	// $('#answer').val('')
+	location.reload()
+}})
 
 $('#loginSubmit').on({ click: e =>{
 	alert($('#inputEmail').val())
