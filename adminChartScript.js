@@ -2,8 +2,8 @@ const client = Rapid.createClient
 	('NDA1OWE0MWo1b3AzYjJ0LnJhcGlkLmlv')
 
 qid = ""
-dict = {}
 let sub
+let dict
 
 client
 	.channel("qPing")
@@ -16,9 +16,11 @@ client
 		sub = client
 			.collection("results")
 			.filter({'questionID' : qid})
-			.subscribe( (data) => {
+			.subscribe( (data, changes) => {
+				dict = {}
 				console.log("confirm")
 				console.log(data)
+				console.log(changes)
 				data.forEach( (e) => {
 					key = e.body.answers
 					if (!(key in dict)) {
@@ -26,8 +28,8 @@ client
 					}
 					dict[key]++
 				})
-				// console.log("dict:")
-				// console.log(dict)
+				console.log("dict:")
+				console.log(dict)
 			})
 	})
 
