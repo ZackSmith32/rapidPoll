@@ -1,0 +1,79 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<script type="text/javascript">
+	window.onload = function () {
+		// initial values of dataPoints
+		var dps = [
+		{label: "Option 1", y: 0},
+		{label: "Option 2", y: 0},
+		{label: "Option 3", y: 0},
+		{label: "Undecided", y: 46},
+		];
+		var questionTitle = "Question???  -- answers: 42";
+
+		var chart = new CanvasJS.Chart("chartContainer",{
+			theme: "theme3",
+			title:{ 
+				text: "Question currently being asked."
+			},
+			axisY: {				
+				title: "Poll results"
+			},					
+			legend:{
+				verticalAlign: "top",
+				horizontalAlign: "centre",
+				fontSize: 16
+
+			},
+			data : [{
+				type: "line",
+				//showInLegend: true,
+				//legendMarkerType: "none",
+				//legendText: questionTitle,
+				//indexLabel: "{y}",
+				dataPoints: dps
+			}]
+		});
+
+		// renders initial chart
+		chart.render();
+
+		var sum = 590;	 //initial sum 
+
+		var updateInterval = 10;  // milliseconds
+
+		var updateChart = function () {
+			// Selecting a random dataPoint
+			var dataPointIndex = Math.round(Math.random()*4);		
+
+			// generating random value
+			var deltaY = Math.round(2 + Math.random() *(-2-2));	
+
+			// adding random value to random dataPoint
+			dps[dataPointIndex].y = (dps[dataPointIndex].y + deltaY) > 0 ? dps[dataPointIndex].y + deltaY : 0 ;
+
+			// updating legend text. 
+			sum = sum + deltaY;
+			questionTitle = "question??? answers: " + sum;			
+			chart.options.data[0].legendText = questionTitle;	
+
+			chart.render();
+
+		};
+			 //update chart after specified interval
+			setInterval(function(){updateChart()}, updateInterval);
+		}	
+		</script>
+
+		<script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+	</head>
+
+
+<body>
+	<div id="chartContainer" style="height:442px; width:50%; margin: 0 auto;">
+	</div>
+</body>
+
+</html>

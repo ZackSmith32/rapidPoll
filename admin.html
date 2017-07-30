@@ -8,23 +8,28 @@
   <title>42 Chat Admin</title>
   <link href="https://fonts.googleapis.com/css?family=Poppins:400,600" rel="stylesheet">
   <link href="./style.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
   <script src="https://unpkg.com/rapid-io/dist/rapid.umd.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 
 <body>
   <main>
-	<h1>
-		Admin site	
-	</h1>
-	<button type="button">Publish Question</button>
+  <header>
+    <h1 class="rp">rapidPoll</h1>
+<!--     <h2>
+		  Administator Site	
+	 </h2> -->
+  </header>
 	<div>
 	  <input id="inputQuestion" placeholder="Type question..." />
 	</div>
 	<div id="answerOptions">
 	  <input id="answer" placeholder="Type answer option..." />
 	</div>
-
+  <div id="submit">
+  <button type="button">Publish Question</button>
+  </div>
   </main>
   <script src="./adminScript.js"></script>
 </body>
