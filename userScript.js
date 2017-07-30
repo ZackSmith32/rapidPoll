@@ -14,18 +14,53 @@ client
 			// 	$('#`answerBox').
 			// })
 
-			console.log(qID.questionID)
+			console.log("qID = " + qID.questionID)
 
 			question = 
 				client
 					.collection("questions")
-					.filer({ 'id' : qID.questionID })
+					.filter({ 'id' : qID.questionID })
 					.subscribe( q => {
-						console.log(q.questionText)
+						
+						console.log("question text : " + q[0].body.questionText)
+						$('#questiondiv').text(q[0].body.questionText)
+						q[0].body.answerList.forEach( item => {
+							$('#answerBox').append(
+								'<input type="button" id="response" value='+ item +'>')
+						}
+							
+						)
 					})
 
 		}
 	)
+
+
+// function clickHandle() {
+// 	this
+// }
+
+
+// every time a response is clicked                
+// $('input:button').click( (e) => {
+$('#answerBox').on("click", "input", e => {
+	console.log("click")
+	console.log(e.currentTarget.value)
+	console.dir(e)
+	// console.log(this.text)
+
+	// console.log(e.val())
+	// console.log("answer selected" + e.val())
+	$('#chosenAnswer').text(e.currentTarget.value)
+	// client
+	// 	.collection('results')
+	// 	.mutate( {
+	// 		questionID : testUserData.questionID,
+	// 		answers : testUserData.answers,
+	// 		username : testUserData.username
+	// 	})
+})
+
 /*
 $('#input').keyup(e => {
 	if (e.which === 13) {
@@ -47,13 +82,4 @@ var testUserData = {
 	username : 'zsmith'
 }
 
-// every time a response is clicked                
-$('#response').on( {'click' : e => {
-	client
-		.collection('results')
-		.mutate( {
-			questionID : testUserData.questionID,
-			answers : testUserData.answers,
-			username : testUserData.username
-		})
-}})
+
