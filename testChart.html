@@ -1,18 +1,30 @@
 <!DOCTYPE HTML>
 <html>
 
+
 <head>
-	<script type="text/javascript">
+<script type="text/javascript">
+
+		//this will be
+let userResponse = {
+	'zack' : 5,
+	'wyatt' : 9,
+	'greg' : 8
+		//this will be
+}
+		//this will be
+
 	window.onload = function () {
 		// initial values of dataPoints
-		var dps = [
-		{label: "Option 1", y: 0},
-		{label: "Option 2", y: 0},
-		{label: "Option 3", y: 0},
-		{label: "Undecided", y: 46},
-		];
-		var questionTitle = "Question???  -- answers: 42";
-
+		var dps = []
+		for(var inx in userResponse){
+			dps.push({label: inx, y: userResponse[inx]})
+		}
+		
+		 var questionTitle = "Question???  -- answers: 42";
+		
+		
+		//this should be turned into a init graph function
 		var chart = new CanvasJS.Chart("chartContainer",{
 			theme: "theme3",
 			title:{ 
@@ -39,35 +51,21 @@
 
 		// renders initial chart
 		chart.render();
-
-		var sum = 590;	 //initial sum 
-
-		var updateInterval = 10;  // milliseconds
-
+		
+		var updateInterval = 10;
+		//this will be called eachtime rapid responds
 		var updateChart = function () {
-			// Selecting a random dataPoint
-			var dataPointIndex = Math.round(Math.random()*4);		
-
-			// generating random value
-			var deltaY = Math.round(2 + Math.random() *(-2-2));	
-
-			// adding random value to random dataPoint
-			dps[dataPointIndex].y = (dps[dataPointIndex].y + deltaY) > 0 ? dps[dataPointIndex].y + deltaY : 0 ;
-
-			// updating legend text. 
-			sum = sum + deltaY;
-			questionTitle = "question??? answers: " + sum;			
-			chart.options.data[0].legendText = questionTitle;	
-
+			//take in json object, and parse into label array
+			//then  render
 			chart.render();
-
 		};
-			 //update chart after specified interval
-			setInterval(function(){updateChart()}, updateInterval);
+			 //update chart after we've heard back from rapid.
+			setInterval(
+function(){updateChart()}, updateInterval);
 		}	
 		</script>
 
-		<script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+		<script type="text/javascript" src="javascript/canvasjs.min.js"></script>
 	</head>
 
 
