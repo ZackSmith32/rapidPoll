@@ -38,17 +38,21 @@ $('#answerOptions').on( {keyup: e => {
 	}
 }})
 
-$('button').on( { click: e => {
-	console.log("button")
-	console.log( answerList)
-	client
-		.channel('questions')
-		.publish({
-			question: $('#inputQuestion').val(),
-			answerList: answerList
-		})
-	console.log("button")
-	$('#inputQuestion').val('')
-	$('#answer').val('')
-}})
+// $('button').on( { click: e => {
+// 	console.log("button")
+// 	console.log( answerList)
+// 	client
+// 		.channel('questions')
+// 		.publish({
+// 			question: $('#inputQuestion').val(),
+// 			answerList: answerList
+// 		})
+// 	console.log("button")
+// 	$('#inputQuestion').val('')
+// 	$('#answer').val('')
+// 	window.location.href = "chart.html";
+// }})
 
+$('#loginSubmit').on({ click: e =>{
+	alert($('#inputEmail').val())
+}});
