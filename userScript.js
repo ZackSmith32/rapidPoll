@@ -1,28 +1,30 @@
 const client = Rapid.createClient
 	('NDA1OWE0MWo1b3AzYjJ0LnJhcGlkLmlv')
 const un = 'zack'
+var g_qid = 0
 
-console.log("userScript")
+answerDoc = client
+	.collection('results')
+	.newDocument()
 
-
+/*
+ * when ping is received, look up question in database
+ * 	and update html with question text
+*/
 client
 	.channel('qPing')
 	.subscribe( 
 		(qID) => {
-			// $('#questiondiv').text(question.question)
-			// question.answerList.foreach( (val, i, a) => {
-			// 	$('#`answerBox').
-			// })
-
 			console.log("qID = " + qID.questionID)
-
+			g_qid = qID.questionID
 			question = 
 				client
 					.collection("questions")
 					.filter({ 'id' : qID.questionID })
 					.subscribe( q => {
-						
+						console.log(q)
 						console.log("question text : " + q[0].body.questionText)
+						// console.log("question answers : " + q[0].body.answerList)
 						$('#questiondiv').text(q[0].body.questionText)
 						q[0].body.answerList.forEach( item => {
 							$('#answerBox').append(
@@ -31,55 +33,24 @@ client
 							
 						)
 					})
-
 		}
 	)
 
 
-// function clickHandle() {
-// 	this
-// }
-
-
-// every time a response is clicked                
-// $('input:button').click( (e) => {
+/*
+every time a response is clicked
+*/
 $('#answerBox').on("click", "input", e => {
 	console.log("click")
 	console.log(e.currentTarget.value)
-	console.dir(e)
+	console.log(g_qid)
 	// console.log(this.text)
 
-	// console.log(e.val())
-	// console.log("answer selected" + e.val())
 	$('#chosenAnswer').text(e.currentTarget.value)
-	// client
-	// 	.collection('results')
-	// 	.mutate( {
-	// 		questionID : testUserData.questionID,
-	// 		answers : testUserData.answers,
-	// 		username : testUserData.username
-	// 	})
+	answerDoc
+		.mutate( {
+			questionID : g_qid,
+			answers : e.currentTarget.value,
+			username : un
+		})
 })
-
-/*
-$('#input').keyup(e => {
-	if (e.which === 13) {
-	var doc= client
-			.collection('messages2')
-			.newDocument() ;
-doc.id
-	doc		.mutate({ id: doc.id,
-		text: $('#input').val(),
-				name: un})
-		$('#input').val('')
-	}
-})
-*/
-
-var testUserData = {
-	questionID : 42,
-	answers : ['me', 'myself', 'and I'],
-	username : 'zsmith'
-}
-
-
