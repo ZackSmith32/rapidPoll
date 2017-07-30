@@ -16,7 +16,7 @@ const doc =
 var answerList = []
 
 $('#answerOptions').on( {keyup: e => {
-	if (e.which === 13) {
+	if (e.which === 13 && ($('#answerOptions >input:last').val()) != 0) {
 		// console.log("this" + $('#answerOptions > input:last').val())
 		answerList.push($('#answerOptions > input:last').val())
 		$('#answerOptions').append(
