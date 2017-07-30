@@ -16,7 +16,7 @@ const doc =
 var answerList = []
 
 $('#answerOptions').on( {keyup: e => {
-	if (e.which === 13 && ($('#answerOptions >input:last').val()) != 0) {
+	if (e.which === 13 && ($('#answerOptions > input:last').val()) != 0) {
 		// console.log("this" + $('#answerOptions > input:last').val())
 		answerList.push($('#answerOptions > input:last').val())
 		$('#answerOptions').append(
@@ -26,6 +26,8 @@ $('#answerOptions').on( {keyup: e => {
 
 
 $('button').on( { click: e => {
+	if( $('#inputQuestion').val() == 0)
+		return;
 	console.log("button")
 	console.log("doc <i></i>d = " + doc.id)
 	console.log("question text = " + $('#inputQuestion').val())
