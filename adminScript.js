@@ -43,7 +43,8 @@ $('button').on( { click: e => {
 		})
 
 	console.log("button")
-	$('#inputQuestion').val('')
-	$('#answer').val('')
+	// $('#inputQuestion').val('')
+	// $('#answer').val('')
+	location.reload()
 }})
 
