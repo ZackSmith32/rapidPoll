@@ -18,16 +18,6 @@ client
 			console.log("qID = " + qID.questionID)
 			console.log($('#response'))
 			$('#answerBox').empty()
-
-			// $('#answerBox').children().each( function() {
-			// 	console.log("this:")
-			// 	console.log(this)
-			// 	$(this).remove()
-			// })
-			// $('#response').each( function() {
-			// 	this.remove()
-			// })
-
 			g_qid = qID.questionID
 			question = 
 				client
