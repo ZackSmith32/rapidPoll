@@ -5,6 +5,9 @@ html {
   margin: 0;
   padding: 0;
   font-family: 'Poppins', sans-serif;
+  color: #ccc;
+  background-color: #f8f8ff;
+  text-align: center;
 }
 main {
   height: 100%;
@@ -12,15 +15,21 @@ main {
   display: flex;
   flex-direction: column;
 }
-h1 {
+h2 {
   font-size: 1.2rem;
+  border: 6px solid #444;
   padding: 20px;
-  border-bottom: 1px solid #EEEBF3
+  border-radius: 0.2em;
+  background-color: #1976d2;
 }
 button {
-  width: 200px;
+  margin-top: 20px;
   padding: 5px;
-  margin-bottom: 10px;
+  font-size: 1.0rem;
+  width: 200px;
+  border-radius: 0.5em;
+  background-color: #1976D2;
+  color: #FFF;
 }
 #chatbox {
   flex: 1;
@@ -30,16 +39,23 @@ button {
   padding: 15px 30px;
   border-bottom: 1px solid #EEEBF3
 }
+#inputQuestion {
+  border: 6px solid #1976d2;
+  border-radius: 0.2em;
+  text-align: center;
+}
 input {
   border: 1px solid #EEEBF3;
   border-left: none;
-  padding: 25px 30px;
+  padding: 25px;
+  margin: auto;
   font-size: 1rem;
-  width: 100%;
+  width: 80vw;
   display: block;
   outline: none;
   transition: border .2s ease;
 }
+
 input:focus {
   border-color: #c4c3c9;
 }
